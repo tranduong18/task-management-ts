@@ -3,7 +3,19 @@ import Task from "../../models/task.model";
 
 // [GET] /tasks
 export const index =  async (req: Request, res: Response) => {
-    const tasks = await Task.find({});
+    const find = {
+        deleted: false
+    };
+
+    // Lọc theo trạng thái
+    const status = req.query.status;
+
+    if(status) {
+        find["status"] = status;
+    }
+    // Hết Lọc theo trạng thái
+
+    const tasks = await Task.find(find);
 
     res.json(tasks);
 };
