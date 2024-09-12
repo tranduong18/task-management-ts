@@ -15,6 +15,13 @@ export const index =  async (req: Request, res: Response) => {
     }
     // Hết Lọc theo trạng thái
 
+    // Tìm kiếm
+    if(req.query.keyword){
+        const regex = new RegExp(`${req.query.keyword}`, "i");
+        find["title"] = regex;
+    }
+    // Hết Tìm kiếm
+
      // Sắp xếp
     const sort = {};
 
