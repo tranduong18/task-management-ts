@@ -67,3 +67,25 @@ export const detail = async (req: Request, res: Response) => {
 
     res.json(task);
 };
+
+// [PATCH] /tasks/change-status
+export const changeStatus = async (req: Request, res: Response) => {
+    try {
+        const ids: string[] = req.body.ids;
+        const status: string = req.body.status;
+
+        await Task.updateMany({
+            _id: { $in: ids }
+        }, {
+            status: status
+        })
+
+        res.json({
+            message: "Cập nhật dữ liệu thành công!"
+        });
+    } catch (error) {
+        res.json({
+            message: "Not Found"
+        })
+    }
+}
