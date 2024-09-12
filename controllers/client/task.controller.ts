@@ -107,3 +107,21 @@ export const create = async (req: Request, res: Response) => {
         })
     }
 }
+
+// [PATCH] /tasks/edit/:id
+export const edit = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id;
+
+        await Task.updateOne({
+            _id: id
+        }, req.body);
+        res.json({
+            message: "Cập nhật công việc thành công!"
+        })
+    } catch (error) {
+        res.json({
+            message: "Not Found"
+        })
+    }
+}
